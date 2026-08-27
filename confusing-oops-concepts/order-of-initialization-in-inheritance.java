@@ -1,6 +1,6 @@
 class Main{
     public static void main(String[] args) {
-        Parent obj = new Parent();
+        // Parent obj = new Parent();
         /*
         OUTPUT : ( Parent ) -
 
@@ -10,7 +10,7 @@ class Main{
         */
 
         /*
-        
+
         [ JVM Loads Class ]
                 │
                 ▼
@@ -24,6 +24,23 @@ class Main{
                 │
                 ▼
         3. Constructor Body (Executed last)
+
+        */
+
+
+        new Child(); // creating object of Child class and let's see the output below : 
+        
+        // As u can see the output here ... as parent class loaded first that's why showing Parent static
+        // then Child class get loaded so Child static and rest of the code Parent first then Child.
+        /*
+        OUTPUT : (Child extends Parent) -
+        
+        Parent static block
+        Child static block
+        Parent instance block
+        Parent class constructor
+        Child instance block
+        Child constructor
 
         */
 
@@ -59,4 +76,20 @@ class Parent{
 
     }
 
+}
+
+class Child extends Parent{
+    // In case of inheritance this order of initialization happens to the Parent first then come to Child
+    static{
+        System.out.println("Child static block");
+    }
+
+    {
+        System.out.println("Child instance block");
+    }
+
+    Child(){
+        System.out.println("Child constructor");
+
+    }
 }
